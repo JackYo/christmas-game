@@ -1,0 +1,108 @@
+body {
+  background: url("https://www.transparenttextures.com/patterns/bright-squares.png"),
+    #ffecd2;
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  text-align: center;
+  padding: 20px;
+}
+
+.header {
+  background-color: #d32f2f;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player-list table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+}
+
+.player-list th,
+.player-list td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.player-list th {
+  background-color: #4caf50;
+  color: white;
+}
+
+.level-buttons button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.level-buttons button:disabled {
+  background-color: #9e9e9e;
+}
+
+.add-player-form input {
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.add-player-form button {
+  padding: 10px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.export-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.clear-btn {
+  margin-top: 50px;
+  background-color: #f44336; /* 紅色 */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  opacity: 0.6; /* 降低可見度 */
+  transition: opacity 0.3s ease;
+}
+
+.clear-btn:hover {
+  opacity: 1; /* 滑鼠懸停時全顯 */
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
