@@ -17,6 +17,8 @@ function App() {
     return savedBudget ? JSON.parse(savedBudget) : MAX_BUDGET;
   });
 
+  const [isAnimating, setIsAnimating] = useState(false); // 控制金錢動畫
+
   // 每次 players 或 budget 更新時保存至 localStorage
   useEffect(() => {
     localStorage.setItem("players", JSON.stringify(players));
@@ -46,7 +48,13 @@ function App() {
         reward: newReward,
       };
       setPlayers(updatedPlayers);
-      setBudget(budget - newReward + oldReward);
+      setBudget((prevBudget) => {
+        setIsAnimating(true); // 啟動動畫
+        return prevBudget - newReward + oldReward;
+      });
+
+      // 停止動畫
+      setTimeout(() => setIsAnimating(false), 500);
     } else {
       alert("獎金不足，無法進行操作！");
     }
@@ -75,11 +83,50 @@ function App() {
     XLSX.writeFile(workbook, "玩家記分板.xlsx");
   };
 
+  const importFromExcel = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+  
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: "array" });
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      const importedData = XLSX.utils.sheet_to_json(worksheet);
+  
+      const importedPlayers = importedData.map((row) => ({
+        id: row["員工編號"],
+        name: row["玩家姓名"],
+        level: row["最高級別"] || 0,
+        reward: row["獎金"] || 0,
+      }));
+  
+      // 更新玩家和獎金
+      const totalRewards = importedPlayers.reduce(
+        (acc, player) => acc + (LEVEL_REWARDS[player.level] || 0),
+        0
+      );
+  
+      if (totalRewards <= MAX_BUDGET) {
+        setPlayers(importedPlayers);
+        setBudget(MAX_BUDGET - totalRewards);
+      } else {
+        alert("匯入數據的獎金超出最大預算，請檢查數據！");
+      }
+    };
+  
+    reader.readAsArrayBuffer(file);
+  };
+
   return (
     <div className="app">
       <header className="header">
-        <h1>🎄 聖誕節套圈圈記分板 🎄</h1>
-        <p>剩餘獎金：<strong>${budget}</strong></p>
+        <h1>🎄 套住吵吵鴨 🎄</h1>
+        <p
+          className={`budget ${
+            isAnimating ? budget > 3000 ? "animate-budget budget-high" : budget > 1000 ? "animate-budget budget-mid" : "animate-budget budget-low" : ""
+          }`}>剩餘獎金：<strong>${budget}</strong></p>
       </header>
 
       <div className="game-area">
@@ -89,6 +136,12 @@ function App() {
           <button className="export-btn" onClick={exportToExcel}>
             匯出至 Excel
           </button>
+          <input
+            type="file"
+            accept=".xlsx, .xls"
+            className="import-btn"
+            onChange={importFromExcel}
+          />
           <button className="clear-btn" onClick={clearData}>
             清除數據
           </button>
