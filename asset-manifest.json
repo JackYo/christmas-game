@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/christmas-game/static/css/main.508e197c.css",
+    "main.css": "/christmas-game/static/css/main.d35d4111.css",
     "main.js": "/christmas-game/static/js/main.4b81aefc.js",
     "static/js/488.39f7cd99.chunk.js": "/christmas-game/static/js/488.39f7cd99.chunk.js",
     "static/media/2024聖誕節活動說明v3.png": "/christmas-game/static/media/2024聖誕節活動說明v3.c8fde62bb7b0abf92f85.png",
     "index.html": "/christmas-game/index.html",
-    "main.508e197c.css.map": "/christmas-game/static/css/main.508e197c.css.map",
+    "main.d35d4111.css.map": "/christmas-game/static/css/main.d35d4111.css.map",
     "main.4b81aefc.js.map": "/christmas-game/static/js/main.4b81aefc.js.map",
     "488.39f7cd99.chunk.js.map": "/christmas-game/static/js/488.39f7cd99.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.508e197c.css",
+    "static/css/main.d35d4111.css",
     "static/js/main.4b81aefc.js"
   ]
 }
