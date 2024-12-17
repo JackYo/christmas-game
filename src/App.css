@@ -20,6 +20,7 @@ body {
 }
 
 .game-area {
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,8 +83,18 @@ body {
   cursor: pointer;
 }
 
+.import-btn-switch {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ffb700;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .clear-btn {
-  margin-top: 50px;
+  margin-top: 40px;
   background-color: #f44336; /* 紅色 */
   color: white;
   border: none;
@@ -134,4 +145,53 @@ body {
   padding: 5px;
   cursor: pointer;
   font-size: 14px;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.rules-section {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rules-image {
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.scoreboard-section {
+  flex: 2;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.header {
+  background-color: #d32f2f;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden; /* 防止水平滾動條 */
+}
+
+.budget {
+  font-size: 1.5rem;
+}
+
+.player-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.player-list th, .player-list td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
 }

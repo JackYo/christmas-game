@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import * as XLSX from "xlsx";
+import rulesImage from "./2024聖誕節活動說明v3.png"; // 引入圖片
 
 const MAX_BUDGET = 6000;
 const LEVEL_REWARDS = [0, 100, 300, 500];
@@ -83,6 +84,16 @@ function App() {
     XLSX.writeFile(workbook, "玩家記分板.xlsx");
   };
 
+  const showImportFromExcel = () => {
+    // show or hide btn of import
+    if (document.getElementById("import_btn").style.display !== "none") {
+      document.getElementById("import_btn").style.display = "none";
+    } else {
+      document.getElementById("import_btn").style.display = "block";
+    }
+  };
+    
+
   const importFromExcel = (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -121,30 +132,47 @@ function App() {
 
   return (
     <div className="app">
-      <header className="header">
-        <h1>🎄 套住吵吵鴨 🎄</h1>
-        <p
-          className={`budget ${
-            isAnimating ? budget > 3000 ? "animate-budget budget-high" : budget > 1000 ? "animate-budget budget-mid" : "animate-budget budget-low" : ""
-          }`}>剩餘獎金：<strong>${budget}</strong></p>
-      </header>
+      
+      <div className="scoreboard-section">
+        <header className="header">
+          <h1>🎄 套住吵吵鴨 🎄</h1>
+          <p
+            className={`budget ${
+              isAnimating ? budget > 3000 ? "animate-budget budget-high" : budget > 1000 ? "animate-budget budget-mid" : "animate-budget budget-low" : ""
+            }`}>剩餘獎金：<strong>${budget}</strong></p>
+        </header>
 
-      <div className="game-area">
-        <AddPlayerForm addPlayer={addPlayer} />
-        <PlayerList players={players} updateLevel={updateLevel} />
-        <div className="controls">
-          <button className="export-btn" onClick={exportToExcel}>
-            匯出至 Excel
-          </button>
-          <input
-            type="file"
-            accept=".xlsx, .xls"
-            className="import-btn"
-            onChange={importFromExcel}
-          />
-          <button className="clear-btn" onClick={clearData}>
-            清除數據
-          </button>
+        <div className="main-container">
+          {/* 左半部分：規則圖片 */}
+          <div className="rules-section">
+            <img
+              src={rulesImage}
+              alt="遊戲規則"
+              className="rules-image"
+            />
+          </div>
+          {/* 右半部分：計分板 */}
+          <div className="game-area">
+            <AddPlayerForm addPlayer={addPlayer} />
+            <PlayerList players={players} updateLevel={updateLevel} />
+            <div className="controls">
+              <button className="export-btn" onClick={exportToExcel}>
+                匯出至 Excel
+              </button>
+              <button className="import-btn-switch" onClick={showImportFromExcel}>
+                匯入自 Excel
+              </button>
+              <input id="import_btn" style={{ display: "none" }}
+                type="file"
+                accept=".xlsx, .xls"
+                className="import-btn"
+                onChange={importFromExcel}
+              />
+              <button className="clear-btn" onClick={clearData}>
+                清除數據
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
