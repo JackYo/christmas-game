@@ -129,6 +129,18 @@ function App() {
   
     reader.readAsArrayBuffer(file);
   };
+  
+  // function myFunction() {
+  //   const stickyTop = document.getElementById("main_section").offsetTop;
+  //   if (window.scrollY > stickyTop) {
+  //     document.getElementById("rules_section").classList.add("rules-fixed");
+  //     document.getElementById("rules_section_padding").style.display = "";
+  //   } else {
+  //     document.getElementById("rules_section").classList.remove("rules-fixed");
+  //     document.getElementById("rules_section_padding").style.display = "none";
+  //   }
+  // }
+  // window.onscroll = function() {myFunction()};
 
   return (
     <div className="app">
@@ -142,9 +154,17 @@ function App() {
             }`}>剩餘獎金：<strong>${budget}</strong></p>
         </header>
 
-        <div className="main-container">
-          {/* 左半部分：規則圖片 */}
-          <div className="rules-section">
+        <div id="main_section" className="main-container">
+          {/* 左半部分：sticky 規則圖片 */}
+          {/* <div id="rules_section" className="rules-section">
+            <img
+              src={rulesImage}
+              alt="遊戲規則"
+              className="rules-image"
+            />
+          </div> */}
+          {/* 左半部分：padding */}
+          <div id="rules_section_padding" className="rules-section" >
             <img
               src={rulesImage}
               alt="遊戲規則"
